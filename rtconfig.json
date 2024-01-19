@@ -1,0 +1,13 @@
+{
+    "width" : 900,
+    "height" : 900,
+
+    "pixSize" : 4,
+
+    "renderTileSize": 8,
+    "renderThreads": 4,
+
+    "memoryStrategy": "heap",
+    
+    "scene": "scenes/testScene1.json"
+}

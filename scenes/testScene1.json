@@ -1,0 +1,67 @@
+{
+    "materials": [
+        {
+            "name": "ground",
+            "type": "diffuse",
+            "albedo": [0.95, 0.95, 0.95] 
+        },
+        {
+            "name": "mat1",
+            "type": "metal",
+            "albedo": [0.95, 0.3, 0.3],
+            "fuzz": 0.05
+        },
+        {
+            "name": "dif1",
+            "type": "diffuse",
+            "albedo": [0.95, 0.95, 0.6] 
+        },
+        {
+            "name": "dif2",
+            "type": "diffuse",
+            "albedo": [0.95, 0.6, 0.6] 
+        },
+        {
+            "name": "glass1",
+            "type": "glass",
+            "albedo": [0.99, 0.99, 0.99],
+            "ior": 1.45
+        }
+    ],
+
+    "objects": [
+        {
+            "shape": "sphere",
+            "material": "glass1",
+            "transform": {
+                "position": [3, 1, 3],
+                "radius": 1
+            }
+        },
+        {
+            "model": "models/cube.obj",
+            "material": "mat1",
+            "transform": {
+                "position": [0, 1.73, 0],
+                "rotation": [90, 45, 45]
+            }
+        },
+        {
+            "model": "models/teapot.obj",
+            "material": "dif1",
+            "transform": {
+                "position": [0, 1, 4],
+                "rotation": [0, 0, 0]
+            }
+        },
+        {
+            "model": "models/cube.obj",
+            "material": "ground",
+            "transform": {
+                "position": [0, -1, 0],
+                "scale": [1000, 1, 1000],
+                "rotation": [0, 0, 0]
+            }
+        }
+    ]
+}
