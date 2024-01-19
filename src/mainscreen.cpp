@@ -56,9 +56,14 @@ bool MainScreen::OnUserUpdate(float dTime) {
 
     drawColorArray();
 
-    std::cout << "Done " << processedSamples << " samples                     \r";
-    std::cout << std::flush;
-    DrawString({1, 1}, "S: " + std::to_string((int) processedSamples) + ", L:" + std::to_string(cam.lensSides), olc::RED);
+    if (drawInfo) {
+        DrawString({1, 1}, "S: " + std::to_string((int) processedSamples) + ", L:" + std::to_string(cam.lensSides), olc::RED);
+        
+        auto center = GetScreenSize() / 2;
+        auto color = olc::RED;
+        DrawLine(center + olc::vi2d{0, 5}, center + olc::vi2d{0, -5}, color);
+        DrawLine(center + olc::vi2d{5, 0}, center + olc::vi2d{-5, 0}, color);
+    }
     //sAppName = std::to_string(processedSamples);
     return true;
 }
@@ -205,10 +210,17 @@ void MainScreen::processKeys(float dTime) {
         clearColorArray();
     }
 
-    if (GetKey(olc::Key::R).bPressed) {
-        std::cout << "\n\nReloading current scene...\n\n";
-        reloadScene();
+    if (GetKey(olc::Key::F).bPressed) {
+        HitRecord rec {};
+        auto ray = cam.getRay(0.5, 0.5);
+        world->hit(ray, 0.0001, std::numeric_limits<double>::infinity(), rec);
+        focusDist = (rec.point - cam.origin).mag();
+        std::cout << "\t Refocus distance: " << focusDist << "\n";
         clearColorArray();
+    }
+
+    if (GetKey(olc::Key::F1).bPressed) {
+        drawInfo = !drawInfo;
     }
 
     phi = clamp(phi, -mathPi / 2, mathPi / 2);
@@ -224,8 +236,8 @@ void MainScreen::DrawScene() {
         for (int y = reg.y0; y < reg.y1; y++) {
             for (int x = reg.x0; x < reg.x1; x++) {
                 
-                auto u = (x + randomDouble()) / double(size.x - 1);
-                auto v = (y + randomDouble()) / double(size.y - 1);
+                auto u = (double(x) + randomDouble()) / double(size.x - 1);
+                auto v = (double(y) + randomDouble()) / double(size.y - 1);
 
                 Ray r = cam.getRay(u, v);
                 if (!visualizeRenderRegions) {

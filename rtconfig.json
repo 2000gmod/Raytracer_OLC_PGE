@@ -5,7 +5,7 @@
     "pixSize" : 4,
 
     "renderTileSize": 8,
-    "renderThreads": 4,
+    "renderThreads": 0,
 
     "memoryStrategy": "heap",
     

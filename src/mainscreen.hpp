@@ -29,6 +29,7 @@ class MainScreen : public olc::PixelGameEngine {
         bool running;
         uint32_t tileSize;
         bool visualizeRenderRegions = false;
+        bool drawInfo = true;
         std::string sceneName;
 
 

@@ -58,7 +58,9 @@ int main() {
     int width = data["width"];
     int height = data["height"];
 
-    MainScreen screen(data["renderTileSize"], data["renderThreads"], data["scene"]);
+    auto threads = data["renderThreads"] <= 0 ? (int) data["renderThreads"] : std::thread::hardware_concurrency();
+
+    MainScreen screen(data["renderTileSize"], threads, data["scene"]);
     if (screen.Construct(width / pixSize, height / pixSize, pixSize, pixSize)) {
         screen.Start();
     }
