@@ -51,9 +51,13 @@ add_custom_target(config ALL
 add_executable(rtcpu ${sources})
 target_link_libraries(rtcpu PRIVATE olcpge)
 target_link_libraries(rtcpu PRIVATE threadpool)
-target_link_libraries(rtcpu PRIVATE -lX11 -lGL -lpthread -lpng -pg)
-
 target_link_libraries(rtcpu PRIVATE nlohmann_json::nlohmann_json)
+
+if (LINUX OR APPLE)
+    target_link_libraries(rtcpu PRIVATE -lX11 -lGL -lpthread -lpng -pg)
+endif()
+
+
 
 
 

@@ -59,7 +59,7 @@ enum class MemoryStrategy {
 extern MemoryStrategy memStrategy;
 
 template <class T, class... Args>
-inline std::shared_ptr<T> makeSP(Args... args) {
+inline std::shared_ptr<T> makeSP(const Args &...args) {
     if (memStrategy == MemoryStrategy::HEAP) return std::make_shared<T>(args...);
 
     static auto df = [] (T *t) {
